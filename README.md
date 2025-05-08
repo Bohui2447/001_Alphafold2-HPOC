@@ -17,7 +17,7 @@ The repo for SPOC is here: https://github.com/walterlab-HMS/SPOC
 
 # This code will submit the the same number of jobs to gpu as to the number of predictions you want to make. 
 # You can find the colabfold ouput in the same folder as the fasta sequence file. 
-    
+```bash    
 #!/bin/bash
 #BSUB -q gpu
 #BSUB -R "rusage[mem=20G]"
@@ -51,7 +51,7 @@ singularity exec --nv $LOCALCOLABIMG colabfold_batch \
     --num-ensemble 1 \
     --num-models 3 \
     "$FASTA" "$FOLDER"
-
+```
 
 ### SPOC Set-up
 ## What is SPOC and why we use it?
