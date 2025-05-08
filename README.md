@@ -226,5 +226,5 @@ for folder in */; do
     folder=${folder%/}
     echo "Running on $folder"
     python3 "$RUN_WRAPPER_PATH" "$folder"
-done
+```
     Now you have a list of SPOC predictions within the same directory as the run.py (which is your SPOC folder)
