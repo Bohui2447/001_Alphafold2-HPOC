@@ -205,22 +205,21 @@ python3 run.py my_afm_predictions_folder
 
     Copy and paste into the file (be sure to change the directory in the script!):
     ```bash
-    #!/bin/bash
+#!/bin/bash
 #BSUB -q large
 #BSUB -n 40
 #BSUB -J spoc_predict
 #BSUB -W 10:00
 #BSUB -oo spoc_predict.out
 #BSUB -eo spoc_predict.err
+#BSUB -R "rusage[mem=8000]"
 
 # Setup conda
-eval "$(micromamba shell hook --shell=bash)"
+source ~/.bashrc
 conda activate spoc_venv
 
-# Define the path to run_wrapper.py
-RUN_WRAPPER_PATH="/home/bohui.li3-umw/Bohui/004_sx_apex_alfold3/SPOC/run_wrapper.py"
 
-# Go to the directory that contains all the predictions
+RUN_WRAPPER_PATH="/home/bohui.li3-umw/Bohui/004_sx_apex_alfold3/SPOC/run_wrapper.py"
 cd /home/bohui.li3-umw/Bohui/004_sx_apex_alfold3/All_multimer
 
 for folder in */; do
