@@ -65,15 +65,15 @@ singularity exec --nv $LOCALCOLABIMG colabfold_batch \
 
 ### Create environment to load necessary dependencies
 
-If you are using conda or miniconda, please refer to original repo. The following is for micromamba
+If you are using conda or miniconda, please refer to original repo.
 
 - create the environment:
   ```bash
-  micromamba env create -f SPOC/environment.yml
+  conda env create -f SPOC/environment.yml
   ```
 - activate the environment:
   ``` bash
-  micromamba activate spoc_venv
+  conda activate spoc_venv
   ```
 
 ### Run SPOC 
@@ -97,8 +97,8 @@ python3 run.py my_afm_predictions_folder
 ```
 
 ---
-# Run Batch files for colabfold and SPOC
-## Colabfold
+### Run Batch files for colabfold and SPOC
+
 ### Example Script for a low number of tasks at once (<20):
 ```bash
     #!/bin/bash
@@ -196,7 +196,7 @@ python3 run.py my_afm_predictions_folder
         for folder in sys.argv[1:]:
             run_prediction(folder)
     ```
-- Step 2: In the same directory of your All_Multimer folder, get all the names of the fasta files into the input_folders.txt
+- Step 2: In the same directory of your All_Multimer folder, get all the folder names of the fasta files into the input_folders.txt
     ```bash
     find All_multimer -maxdepth 1 -type d -not -path 'All_multimer' > input_folders.txt
     ```
@@ -206,27 +206,26 @@ python3 run.py my_afm_predictions_folder
     Copy and paste into the file (be sure to change the directory in the script!):
     ```bash
     #!/bin/bash
-    #BSUB -q large
-    #BSUB -n 40
-    #BSUB -J spoc_predict
-    #BSUB -W 96:00
-    #BSUB -oo spoc_predict.out
-    #BSUB -eo spoc_predict.err
-    
-    # Setup micromamba
-    eval "$(micromamba shell hook --shell=bash)"
-    micromamba activate spoc_venv
-    
-    # Define the path to run_wrapper.py
-    RUN_WRAPPER_PATH="/home/fangyi.zhai-umw/colabfold/SPOC/run_wrapper.py"
-    
-    # Go to the directory that contains all the predictions
-    cd /home/fangyi.zhai-umw/colabfold/All_MNK1
-    
-    for folder in */; do
-        folder=${folder%/}
-        echo "Running on $folder"
-        python3 "$RUN_WRAPPER_PATH" "$folder"
-    done
-    ```
+#BSUB -q large
+#BSUB -n 40
+#BSUB -J spoc_predict
+#BSUB -W 10:00
+#BSUB -oo spoc_predict.out
+#BSUB -eo spoc_predict.err
+
+# Setup conda
+eval "$(micromamba shell hook --shell=bash)"
+conda activate spoc_venv
+
+# Define the path to run_wrapper.py
+RUN_WRAPPER_PATH="/home/bohui.li3-umw/Bohui/004_sx_apex_alfold3/SPOC/run_wrapper.py"
+
+# Go to the directory that contains all the predictions
+cd /home/bohui.li3-umw/Bohui/004_sx_apex_alfold3/All_multimer
+
+for folder in */; do
+    folder=${folder%/}
+    echo "Running on $folder"
+    python3 "$RUN_WRAPPER_PATH" "$folder"
+done
     Now you have a list of SPOC predictions within the same directory as the run.py (which is your SPOC folder)
