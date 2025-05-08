@@ -204,7 +204,8 @@ python3 run.py my_afm_predictions_folder
 - Step 3: Create a file at the same directory as the input_folders.txt:```nano run_prediction.sh```
 
     Copy and paste into the file (be sure to change the directory in the script!):
-    ```bash
+
+```bash
 #!/bin/bash
 #BSUB -q large
 #BSUB -n 40
