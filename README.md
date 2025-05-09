@@ -27,7 +27,7 @@ The repo for SPOC is here: https://github.com/walterlab-HMS/SPOC
 #BSUB -W 2:00
 
 # Base directory (from your screenshot)
-BASE_DIR="/user/All_multier" # change the user foder based on your hpc account
+BASE_DIR="/user/All_multimer" # change the user foder based on your hpc account
 
 # Auto-generate input list from folder structure
 INPUT_LIST=($(ls -d $BASE_DIR/MLP3B_HUMAN_*_HUMAN))
@@ -196,7 +196,7 @@ python3 run.py my_afm_predictions_folder
         for folder in sys.argv[1:]:
             run_prediction(folder)
     ```
-- Step 2: In the same directory of your All_Multimer folder, get all the folder names of the fasta files into the input_folders.txt
+- Step 2: In the same directory of your All_Multimer folder, copy and paste all the folder names of the fasta files into the input_folders.txt
     ```bash
     find All_multimer -maxdepth 1 -type d -not -path 'All_multimer' > input_folders.txt
     ```
